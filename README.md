@@ -1,77 +1,68 @@
-[![headline](docs/assets/headline.png)](https://backstage.io/)
+# Configuração e Implantação do Backstage com Docker
 
-# [Backstage](https://backstage.io)
+Esse resumo fornece um passo a passo sobre como configurar e implantar o Backstage em um ambiente Docker.
+Para a resolução da atividade, me baseei no seguinte link: **_https://github.com/guymenahem/how-to-devops-tools/tree/main/backstage_**
 
-English \| [한국어](README-ko_kr.md) \| [中文版](README-zh_Hans.md)
+## Pré-requisitos
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![CNCF Status](https://img.shields.io/badge/cncf%20status-incubation-blue.svg)](https://www.cncf.io/projects)
-[![Discord](https://img.shields.io/discord/687207715902193673?logo=discord&label=Discord&color=5865F2&logoColor=white)](https://discord.gg/backstage-687207715902193673)
-![Code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)
-[![Codecov](https://img.shields.io/codecov/c/github/backstage/backstage)](https://codecov.io/gh/backstage/backstage)
-[![](https://img.shields.io/github/v/release/backstage/backstage)](https://github.com/backstage/backstage/releases)
-[![Uffizzi](https://img.shields.io/endpoint?url=https%3A%2F%2Fapp.uffizzi.com%2Fapi%2Fv1%2Fpublic%2Fshields%2Fgithub.com%2Fbackstage%2Fbackstage)](https://app.uffizzi.com/ephemeral-environments/backstage/backstage)
-[![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7678/badge)](https://bestpractices.coreinfrastructure.org/projects/7678)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/backstage/backstage/badge)](https://securityscorecards.dev/viewer/?uri=github.com/backstage/backstage)
+Antes de começar, certifique-se de que os seguintes softwares estão instalados em seu sistema:
 
-## What is Backstage?
+- [Yarn](https://yarnpkg.com/getting-started/install)
+- [Node.js](https://nodejs.org/en/download/)
+- [Docker](https://www.docker.com/products/docker-desktop)
 
-[Backstage](https://backstage.io/) is an open source framework for building developer portals. Powered by a centralized software catalog, Backstage restores order to your microservices and infrastructure and enables your product teams to ship high-quality code quickly without compromising autonomy.
+## Configuração do Repositório
 
-Backstage unifies all your infrastructure tooling, services, and documentation to create a streamlined development environment from end to end.
+### 1. Fork do Repositório
 
-![software-catalog](docs/assets/header.png)
+Primeiro, faça um fork do [repositório oficial do Backstage](https://github.com/backstage/backstage) para a sua conta no GitHub. Isso permitirá que você tenha uma cópia pessoal do código para trabalhar.
 
-Out of the box, Backstage includes:
+### 2. Clone o Repositório
 
-- [Backstage Software Catalog](https://backstage.io/docs/features/software-catalog/) for managing all your software such as microservices, libraries, data pipelines, websites, and ML models
-- [Backstage Software Templates](https://backstage.io/docs/features/software-templates/) for quickly spinning up new projects and standardizing your tooling with your organization’s best practices
-- [Backstage TechDocs](https://backstage.io/docs/features/techdocs/) for making it easy to create, maintain, find, and use technical documentation, using a "docs like code" approach
-- Plus, a growing ecosystem of [open source plugins](https://github.com/backstage/backstage/tree/master/plugins) that further expand Backstage’s customizability and functionality
+Clone o repositório forkado para sua máquina local usando o seguinte comando:
 
-Backstage was created by Spotify but is now hosted by the [Cloud Native Computing Foundation (CNCF)](https://www.cncf.io) as an Incubation level project. For more information, see the [announcement](https://backstage.io/blog/2022/03/16/backstage-turns-two#out-of-the-sandbox-and-into-incubation).
+```bash
+git clone git clone git@github.com:backstage/backstage.git
+cd <nome do projeto>
+```
 
-## Project roadmap
+Nesse caso:
 
-For information about the detailed project roadmap including delivered milestones, see [the Roadmap](https://backstage.io/docs/overview/roadmap).
+```bash
+cd backstage-ponderada
+```
 
-## Getting Started
+### 3. Instalação das Dependências
 
-To start using Backstage, see the [Getting Started documentation](https://backstage.io/docs/getting-started).
+Dentro do diretório do projeto, execute o seguinte comando para instalar todas as dependências necessárias:
 
-## Documentation
+```bash
+yarn install --frozen-lockfile
+```
 
-The documentation of Backstage includes:
+### 4. Execução Backstage
 
-- [Main documentation](https://backstage.io/docs)
-- [Software Catalog](https://backstage.io/docs/features/software-catalog/)
-- [Architecture](https://backstage.io/docs/overview/architecture-overview) ([Decisions](https://backstage.io/docs/architecture-decisions/))
-- [Designing for Backstage](https://backstage.io/docs/dls/design)
-- [Storybook - UI components](https://backstage.io/storybook)
+Para iniciar o Backstage em modo de desenvolvimento, utilize o comando:
 
-## Community
+```bash
+yarn dev
+```
 
-To engage with our community, you can use the following resources:
+## Construção da Imagem Docker
 
-- [Discord chatroom](https://discord.gg/backstage-687207715902193673) - Get support or discuss the project
-- [Contributing to Backstage](https://github.com/backstage/backstage/blob/master/CONTRIBUTING.md) - Start here if you want to contribute
-- [RFCs](https://github.com/backstage/backstage/labels/rfc) - Help shape the technical direction
-- [FAQ](https://backstage.io/docs/FAQ) - Frequently Asked Questions
-- [Code of Conduct](CODE_OF_CONDUCT.md) - This is how we roll
-- [Adopters](ADOPTERS.md) - Companies already using Backstage
-- [Blog](https://backstage.io/blog/) - Announcements and updates
-- [Newsletter](https://spoti.fi/backstagenewsletter) - Subscribe to our email newsletter
-- [Backstage Community Sessions](https://github.com/backstage/community) - Join monthly meetups and explore Backstage community
-- Give us a star ⭐️ - If you are using Backstage or think it is an interesting project, we would love a star ❤️
+### 1. Compilação do Backstage
 
-## License
+Antes de construir a imagem Docker, compile os pacotes necessários e construa a aplicação backend:
 
-Copyright 2020-2024 © The Backstage Authors. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our Trademark Usage page: https://www.linuxfoundation.org/trademark-usage
+```bash
+yarn tsc
+yarn build:backend
+```
 
-Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
+### 2. Construção da Imagem
 
-## Security
+Utilize o seguinte comando para construir a imagem Docker do Backstage, especificando a tag desejada:
 
-Please report sensitive security issues using Spotify's [bug-bounty program](https://hackerone.com/spotify) rather than GitHub.
-
-For further details, see our complete [security release process](SECURITY.md).
+```bash
+docker image build . -f packages/backend/Dockerfile --tag backstage:latest
+```

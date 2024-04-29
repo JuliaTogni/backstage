@@ -40,6 +40,9 @@ Dentro do diretório do projeto, execute o seguinte comando para instalar todas 
 yarn install --frozen-lockfile
 ```
 
+Evidência dos passos a cima: 
+![Texto alternativo](https://github.com/JuliaTogni/backstage/blob/master/Captura%20de%20tela%202024-04-29%20094052.png)
+
 ### 4. Execução Backstage
 
 Para iniciar o Backstage em modo de desenvolvimento, utilize o comando:
@@ -47,6 +50,10 @@ Para iniciar o Backstage em modo de desenvolvimento, utilize o comando:
 ```bash
 yarn dev
 ```
+
+Evidência do passo a cima: 
+![Texto alternativo](https://github.com/JuliaTogni/backstage/blob/master/Captura%20de%20tela%202024-04-29%20095106.png)
+![Texto alternativo](https://github.com/JuliaTogni/backstage/blob/master/Captura%20de%20tela%202024-04-29%20100448.png)
 
 ## Construção da Imagem Docker
 
@@ -59,6 +66,9 @@ yarn tsc
 yarn build:backend
 ```
 
+Evidência dos passos a cima: 
+![Texto alternativo](https://github.com/JuliaTogni/backstage/blob/master/Captura%20de%20tela%202024-04-29%20101116.png)
+
 ### 2. Construção da Imagem
 
 Utilize o seguinte comando para construir a imagem Docker do Backstage, especificando a tag desejada:
@@ -66,3 +76,6 @@ Utilize o seguinte comando para construir a imagem Docker do Backstage, especifi
 ```bash
 docker image build . -f packages/backend/Dockerfile --tag backstage:latest
 ```
+
+Evidência do passo a cima: 
+![Texto alternativo](https://github.com/JuliaTogni/backstage/blob/master/Captura%20de%20tela%202024-04-29%20101308.png)
